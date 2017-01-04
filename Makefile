@@ -1,3 +1,5 @@
+CC?=gcc
+
 all: memcpy memcpy-fort memcpy-nofort memcpy-static memcpy-static-fort memcpy-static-nofort
 	
 
@@ -12,22 +14,22 @@ check:
 	nm memcpy-static-nofort | grep memcpy
 
 memcpy:
-	gcc -o $@ memcpy.c
+	$(CC) -o $@ memcpy.c
 
 memcpy-fort:
-	gcc -O2 -D_FORTIFY_SOURCE=2 -o $@ memcpy.c
+	$(CC) -O2 -D_FORTIFY_SOURCE=2 -o $@ memcpy.c
 
 memcpy-nofort:
-	gcc -D_FORTIFY_SOURCE=0 -fno-stack-protector -o $@ memcpy.c
+	$(CC) -D_FORTIFY_SOURCE=0 -fno-stack-protector -o $@ memcpy.c
 
 memcpy-static:
-	gcc -static -o $@ memcpy.c
+	$(CC) -static -o $@ memcpy.c
 
 memcpy-static-fort:
-	gcc -O2 -static -D_FORTIFY_SOURCE=2 -o $@ memcpy.c
+	$(CC) -O2 -static -D_FORTIFY_SOURCE=2 -o $@ memcpy.c
 
 memcpy-static-nofort:
-	gcc -static -D_FORTIFY_SOURCE=0 -fno-stack-protector -o $@ memcpy.c
+	$(CC) -static -D_FORTIFY_SOURCE=0 -fno-stack-protector -o $@ memcpy.c
 
 clean:
 	rm -f memcpy memcpy-fort memcpy-nofort memcpy-static memcpy-static-fort memcpy-static-nofort
